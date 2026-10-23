@@ -3,575 +3,1582 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Misi Bongkar Ekonomi Malaysia | Game Adventure</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misi Bongkar Ekonomi Malaysia</title>
 
-:root{
-  --ink:#20304c;--cream:#fff9e9;--yellow:#ffdc61;
-  --pink:#ff8fab;--blue:#71d7ef;--green:#9be3a3;
-  --purple:#c9b1ff;--orange:#ffad73;--dark:#26345b;
+<style>
+:root {
+  --ink: #26345d;
+  --purple: #7158d9;
+  --pink: #ff7ca8;
+  --yellow: #ffd76a;
+  --mint: #8de3c0;
+  --blue: #82c9ff;
+  --paper: #fffdf5;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:#e9f8ee;color:var(--ink);
-  font-family:'Nunito',sans-serif;font-weight:700;
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%, #ffe4ef 0, transparent 25%),
+    radial-gradient(circle at 90% 20%, #d9f8ee 0, transparent 28%),
+    linear-gradient(135deg, #fff8e9, #eef5ff);
+  min-height: 100vh;
 }
-button{font:inherit;cursor:pointer}
-button:focus-visible{outline:4px solid #ffbc42;outline-offset:3px}
-.hero{
-  position:relative;overflow:hidden;padding:34px 6% 45px;
-  background:linear-gradient(140deg,#283969,#526cc0 55%,#8b77d9);
-  color:white;border-radius:0 0 35px 35px;
+
+button { font: inherit; }
+
+button:focus-visible {
+  outline: 3px solid #26345d;
+  outline-offset: 3px;
 }
-.hero:before,.hero:after{
-  content:"";position:absolute;border-radius:50%;pointer-events:none;
-  background:#ffffff12
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 5%;
+  background: rgba(255,255,255,.8);
+  border-bottom: 2px solid white;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(12px);
 }
-.hero:before{width:300px;height:300px;right:-50px;top:-100px}
-.hero:after{width:190px;height:190px;right:170px;bottom:-130px}
-.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;
-  position:relative;z-index:1;flex-wrap:wrap}
-.logo{font-size:.9rem;letter-spacing:1px}
-.status{display:flex;gap:9px;flex-wrap:wrap}
-.pill{padding:8px 13px;border-radius:99px;background:#ffffff22;
-  border:1px solid #ffffff35;font-size:.88rem}
-.hero-inner{max-width:1050px;margin:34px auto 0;position:relative;z-index:1}
-.eyebrow{font-size:.78rem;letter-spacing:2px;color:var(--yellow);text-transform:uppercase}
-h1{font:800 clamp(2.5rem,7vw,5.7rem)/.98 'Baloo 2',sans-serif;
-  margin:12px 0 18px;max-width:800px}
-h1 span{color:var(--yellow)}
-.hero p{max-width:650px;color:#f0f2ff;line-height:1.7}
-.btn{
-  border:0;border-radius:15px;padding:13px 20px;
-  background:var(--yellow);color:var(--ink);font-weight:900;
-  box-shadow:0 5px 0 #c5a338;transition:transform .15s,box-shadow .15s;
+
+.brand {
+  font-weight: 900;
+  font-size: 15px;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #c5a338}
-.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c5a338}
-.btn.secondary{background:white;box-shadow:0 4px 0 #c5ccd9}
-.btn.purple{background:var(--purple);box-shadow:0 4px 0 #9e88d7}
-.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-main{max-width:1100px;margin:auto;padding:0 20px}
-.section{padding:38px 0}
-.heading{display:flex;justify-content:space-between;gap:15px;align-items:end;
-  flex-wrap:wrap;margin-bottom:18px}
-.heading h2{font:800 clamp(1.7rem,4vw,2.5rem)/1.1 'Baloo 2',sans-serif;margin:5px 0}
-.heading p{color:#68738b;margin:4px 0;max-width:480px}
-.tag{color:#5c6c9c;font-size:.77rem;letter-spacing:1.5px;text-transform:uppercase}
-.progress-card,.mission-brief{
-  background:white;border:2px solid #d9e9db;border-radius:23px;padding:20px;
-  box-shadow:0 7px 0 #d6e7d9;
+
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
-.progress-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.bar{height:13px;background:#e8eee9;border-radius:99px;margin-top:13px;overflow:hidden}
-.bar-fill{height:100%;width:0;background:linear-gradient(90deg,#7cda95,#ffdc61);
-  border-radius:99px;transition:width .4s}
-.map{
-  position:relative;overflow:hidden;border-radius:28px;padding:25px;
-  background-color:#d8f3dc;
-  background-image:radial-gradient(#8bc89b 1.7px,transparent 1.7px);
-  background-size:23px 23px;border:3px solid white;
-  box-shadow:0 8px 0 #c3e3cb;
+
+.small-btn, .main-btn, .option-btn {
+  cursor: pointer;
+  border: 0;
+  border-radius: 14px;
+  padding: 11px 15px;
+  font-weight: 800;
+  transition: transform .18s, box-shadow .18s;
 }
-.map:before{
-  content:"";position:absolute;inset:30px 8% 30px 8%;
-  border:4px dashed #8bbf91;border-radius:45% 55% 50% 40%;
-  transform:rotate(-8deg);pointer-events:none;
+
+.small-btn {
+  background: white;
+  border: 2px solid #e6e4f7;
+  color: var(--ink);
 }
-.map-title{position:relative;text-align:center;margin-bottom:25px}
-.map-title h2{font:800 1.7rem 'Baloo 2';margin:0}
-.map-title p{margin:3px;color:#526f5c;font-size:.9rem}
-.map-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.level{
-  position:relative;border:3px solid white;border-radius:23px;
-  padding:18px;text-align:left;min-height:205px;
-  box-shadow:0 7px 0 #aac9b0;transition:.2s;color:var(--ink);
+
+.main-btn {
+  background: var(--purple);
+  color: white;
+  box-shadow: 0 5px 0 #4d3aa4;
 }
-.level:hover:not(:disabled){transform:translateY(-4px) rotate(-.5deg)}
-.level:disabled{cursor:not-allowed;filter:saturate(.65)}
-.level .level-top{display:flex;justify-content:space-between;gap:8px}
-.level .num{font-size:.78rem;letter-spacing:1px}
-.level .lock{font-size:1.15rem}
-.level .emoji{font-size:3.4rem;display:block;margin:10px 0 0}
-.level h3{font:800 1.65rem 'Baloo 2';margin:0}
-.level p{margin:2px 0 10px;font-size:.91rem}
-.level .level-foot{font-size:.8rem;font-weight:900}
-.level.done{outline:4px solid #61bb77}
-.level.current{animation:bob 2.5s infinite}
-.l1{background:#fff0a7}.l2{background:#a8e5f1}
-.l3{background:#ffc6ad}.l4{background:#d8c8ff}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.tip{margin-top:18px;text-align:center;color:#496a52;font-size:.9rem}
-.panel{
-  display:none;background:white;border:3px solid #dce8df;border-radius:26px;
-  padding:clamp(18px,4vw,32px);box-shadow:0 8px 0 #d1e3d5;
+
+.main-btn.yellow {
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 0 5px 0 #d4a72e;
 }
-.panel.show{display:block;animation:appear .3s ease}
-@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.panel-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.stage-label{color:#6475a5;font-size:.8rem;letter-spacing:1.4px}
-.panel h2{font:800 clamp(1.8rem,5vw,3rem)/1.1 'Baloo 2';margin:7px 0}
-.panel-intro{font-weight:600;color:#626f83}
-.clue{
-  margin:20px 0;padding:20px;border-radius:20px;background:#fff5cb;
-  border-left:6px solid #f0c743;
+
+.small-btn:hover, .main-btn:hover, .option-btn:hover {
+  transform: translateY(-2px);
 }
-.clue h3{margin:0 0 9px;font:800 1.25rem 'Baloo 2'}
-.clue p{margin:8px 0;line-height:1.7;font-weight:600}
-.clue ul{padding-left:22px;font-weight:600;line-height:1.8}
-.fact-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.fact-chips span{background:#fff;border:1px solid #e3d99e;padding:7px 11px;border-radius:99px;font-size:.82rem}
-.unlock-tip{background:#eef8ee;border-radius:14px;padding:14px;margin:15px 0;font-size:.92rem}
-.quiz{margin-top:20px;border:2px solid #e6eaf0;border-radius:20px;padding:20px}
-.quiz h3{font:800 1.3rem 'Baloo 2';margin:0}
-.quiz-question{font-size:1.06rem;margin:13px 0}
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.answer{
-  text-align:left;border:2px solid #e0e5eb;background:#f8fafb;
-  border-radius:13px;padding:13px;color:var(--ink);font-weight:800;
-  transition:.15s;
+
+.main-btn:active, .small-btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
 }
-.answer:hover:not(:disabled){border-color:#8195d6;background:#f0f2ff}
-.answer.correct{background:#e0f7df;border-color:#70bd78}
-.answer.wrong{background:#ffe6e7;border-color:#ef8b93}
-.feedback{min-height:25px;margin:12px 0 0;font-weight:900}
-.feedback.good{color:#27854a}.feedback.bad{color:#b74453}
-.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.match-choice{
-  border:2px solid #dfe7e0;border-radius:14px;background:#f8fbf7;
-  padding:14px;text-align:left;font-weight:800;
+
+.container {
+  max-width: 1120px;
+  margin: auto;
+  padding: 25px 20px 60px;
 }
-.match-choice.selected{border-color:#7d8ed0;background:#edf0ff}
-.match-choice.done{border-color:#73bc7e;background:#e4f7e4}
-.match-choice:disabled{color:var(--ink);opacity:1}
-.boss{
-  background:linear-gradient(135deg,#2b3867,#563c85);color:white;
-  border-radius:28px;padding:clamp(20px,5vw,35px);
-  box-shadow:0 8px 0 #c6badc;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(25px, 6vw, 60px);
+  border-radius: 32px;
+  background: linear-gradient(135deg, #7960e7, #9b7af0 55%, #f18bb8);
+  color: white;
+  box-shadow: 0 16px 35px #6752ba30;
 }
-.boss .heading p{color:#e2ddf7}
-.boss .tag{color:var(--yellow)}
-.boss h2{font:800 clamp(2rem,5vw,3.5rem) 'Baloo 2';margin:6px 0}
-.boss-q{padding:18px 0;border-top:1px solid #ffffff35}
-.boss-q p{font-size:1.02rem}
-.boss-q label{display:block;margin:10px 0;font-weight:700;color:#f2efff;cursor:pointer}
-.boss-q input{accent-color:var(--yellow);margin-right:8px}
-.boss-submit{margin-top:16px}
-.result{
-  display:none;margin-top:22px;padding:23px;border-radius:20px;
-  background:#fff1ad;color:var(--ink);text-align:center;
+
+.hero::before, .hero::after {
+  content: "✦";
+  position: absolute;
+  color: #fff3a5;
+  font-size: 70px;
+  opacity: .7;
 }
-.result .trophy{font-size:4rem}
-.result h3{font:800 2rem 'Baloo 2';margin:5px}
-.result p{font-weight:700}
-.reflection{background:white;border-radius:23px;padding:22px;margin-top:20px;
-  border:2px solid #e0e9e0}
-.reflection textarea{width:100%;min-height:105px;border:2px solid #dce5df;
-  border-radius:13px;padding:12px;font:600 1rem 'Nunito';resize:vertical}
-.reflection h3{font:800 1.5rem 'Baloo 2';margin:4px 0}
-footer{text-align:center;padding:35px 20px;color:#61715f;font-size:.9rem}
-footer strong{color:#344c3c}
-.toast{
-  position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
-  background:#253458;color:white;padding:13px 20px;border-radius:14px;
-  box-shadow:0 5px 0 #17213b;z-index:100;display:none;
-  width:max-content;max-width:90%;text-align:center;
+
+.hero::before { top: 10px; right: 9%; }
+.hero::after { bottom: 8px; right: 24%; font-size: 35px; }
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 690px;
 }
-.confetti{position:fixed;top:-20px;z-index:99;pointer-events:none;
-  animation:fall 2.3s linear forwards;font-size:1.4rem}
-@keyframes fall{to{transform:translateY(110vh) rotate(500deg);opacity:.1}}
-@media(max-width:620px){
-  .hero{padding:24px 20px 35px}
-  main{padding:0 13px}
-  .section{padding:27px 0}
-  .map{padding:15px}
-  .map-grid{gap:10px}
-  .level{padding:13px;min-height:185px}
-  .level .emoji{font-size:2.5rem}
-  .level h3{font-size:1.3rem}
-  .level p{font-size:.82rem}
-  .answers,.match-grid{grid-template-columns:1fr}
-  .status{gap:6px}
-  .pill{padding:7px 10px;font-size:.8rem}
+
+.eyebrow {
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 30px;
+  background: #ffffff2b;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+
+h1 {
+  font-size: clamp(32px, 6vw, 61px);
+  line-height: 1.05;
+  margin: 18px 0;
+  letter-spacing: -1.5px;
+}
+
+.hero p {
+  line-height: 1.7;
+  font-size: 16px;
+  max-width: 600px;
+}
+
+.hero-emoji {
+  font-size: clamp(55px, 9vw, 95px);
+  margin: 12px 0;
+  filter: drop-shadow(0 8px 5px #34216b38);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px 0 28px;
+}
+
+.stat {
+  background: white;
+  border-radius: 19px;
+  padding: 17px;
+  box-shadow: 0 5px 15px #4c437b0c;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #747995;
+  font-weight: 800;
+}
+
+.stat-value {
+  margin-top: 5px;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.section-heading {
+  margin: 35px 0 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: clamp(22px, 4vw, 30px);
+}
+
+.section-heading p {
+  margin: 0;
+  color: #6d718b;
+  line-height: 1.6;
+}
+
+.map {
+  background: #e7f8ed;
+  border: 3px dashed #acd9bd;
+  border-radius: 28px;
+  padding: 20px;
+  position: relative;
+}
+
+.map-label {
+  display: inline-block;
+  background: white;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.level {
+  position: relative;
+  background: white;
+  border-radius: 23px;
+  padding: 22px;
+  border: 3px solid transparent;
+  box-shadow: 0 6px 0 #b6d9c2;
+  transition: transform .2s;
+}
+
+.level.unlocked { cursor: pointer; }
+.level.unlocked:hover { transform: translateY(-4px); }
+.level.current { border-color: #7b64e8; }
+.level.completed { background: #fff9dd; }
+
+.level-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: start;
+}
+
+.level-icon { font-size: 43px; }
+
+.level-number {
+  font-size: 11px;
+  font-weight: 900;
+  color: #8789a2;
+  letter-spacing: 1px;
+}
+
+.level h3 {
+  margin: 12px 0 8px;
+  font-size: 21px;
+}
+
+.level p {
+  color: #71758c;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #eeeafa;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.level.completed .status { background: #d8f5dc; }
+.level.locked { opacity: .67; }
+
+.progress-wrap {
+  background: #e9e6f7;
+  height: 12px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 13px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #7d65e8, #ff83b4);
+  transition: width .4s;
+}
+
+.panel {
+  display: none;
+  margin-top: 28px;
+  background: white;
+  border-radius: 28px;
+  padding: clamp(18px, 4vw, 34px);
+  box-shadow: 0 12px 30px #4c437b12;
+}
+
+.panel.active {
+  display: block;
+  animation: appear .35s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.panel-icon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  background: #f0edff;
+  border-radius: 22px;
+  font-size: 40px;
+}
+
+.panel-header h2 { margin: 0 0 6px; }
+.panel-header p { margin: 0; color: #73778d; }
+
+.info-banner {
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: #f4f1ff;
+  border-left: 5px solid #8770e8;
+  line-height: 1.7;
+  margin: 18px 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin: 20px 0;
+}
+
+.info-item {
+  border-radius: 18px;
+  background: #f8f9ff;
+  padding: 18px;
+}
+
+.info-item h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.info-item p, .info-item li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #5e647e;
+}
+
+.info-item ul {
+  padding-left: 19px;
+  margin-bottom: 0;
+}
+
+.quiz-box {
+  margin-top: 25px;
+  border-radius: 22px;
+  padding: 22px;
+  background: #fff8e3;
+  border: 2px solid #ffe6a3;
+}
+
+.quiz-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 900;
+  color: #967522;
+}
+
+.question {
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 900;
+  margin: 12px 0 18px;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option-btn {
+  text-align: left;
+  color: var(--ink);
+  background: white;
+  border: 2px solid #ede6d2;
+  box-shadow: 0 3px 0 #e8ddc2;
+  line-height: 1.5;
+}
+
+.option-btn.correct {
+  border-color: #39b779;
+  background: #e5fff0;
+}
+
+.option-btn.incorrect {
+  border-color: #f08b99;
+  background: #fff0f1;
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: .9;
+}
+
+.feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 14px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.feedback.show { display: block; }
+.feedback.good { background: #ddf9e7; color: #176a42; }
+.feedback.bad { background: #fff0ee; color: #a13f48; }
+
+.quiz-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hidden { display: none !important; }
+
+.boss {
+  background: linear-gradient(135deg, #33265f, #6550b8);
+  color: white;
+  border-radius: 27px;
+  padding: 25px;
+  margin-top: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.boss h2 { margin: 10px 0; }
+.boss p { line-height: 1.7; color: #eee7ff; }
+
+.boss .main-btn {
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 0 5px 0 #c99e2b;
+}
+
+.boss.locked-boss { opacity: .7; }
+
+.boss .quiz-box {
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.boss .quiz-label { color: #8065cb; }
+
+.reflection {
+  margin-top: 28px;
+  padding: 24px;
+  border-radius: 25px;
+  background: #e8f7ff;
+}
+
+.reflection h2 { margin-top: 0; }
+
+textarea {
+  width: 100%;
+  min-height: 105px;
+  padding: 14px;
+  border: 2px solid #c8e5f5;
+  border-radius: 15px;
+  resize: vertical;
+  font: inherit;
+  line-height: 1.6;
+  background: white;
+}
+
+footer {
+  text-align: center;
+  color: #7a7d92;
+  padding: 25px 10px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+#toast {
+  position: fixed;
+  z-index: 10;
+  bottom: 22px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  background: #302751;
+  color: white;
+  padding: 13px 19px;
+  border-radius: 16px;
+  font-weight: 800;
+  box-shadow: 0 7px 20px #0002;
+  transition: .3s;
+  text-align: center;
+  width: max-content;
+  max-width: 90%;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 9px;
+  height: 14px;
+  animation: fall 2.3s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: .2; }
+}
+
+.certificate {
+  border: 4px double #b59a42;
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 18px;
+  background: #fffdf0;
+  color: #302751;
+  text-align: center;
+}
+
+.certificate h2 { color: #795bc5; }
+
+@media (max-width: 650px) {
+  .levels, .info-grid { grid-template-columns: 1fr; }
+  .stats { gap: 7px; }
+  .stat { padding: 12px; }
+  .stat-value { font-size: 21px; }
+  .topbar { position: static; }
+  .container { padding: 16px 12px 40px; }
+  .hero { border-radius: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<header class="hero">
-  <div class="topline">
-    <div class="logo">🕵️ UNIT PENYIASAT EKONOMI</div>
-    <div class="status">
-      <div class="pill">⭐ Skor: <span id="score">0</span></div>
-      <div class="pill">🏅 Lencana: <span id="badges">0</span>/5</div>
-    </div>
-  </div>
-  <div class="hero-inner">
-    <div class="eyebrow">SEJARAH TAHUN 6 · FAIL SULIT MY-122</div>
-    <h1>MISI BONGKAR<br><span>EKONOMI MALAYSIA!</span></h1>
-    <p>Negara memerlukan detektif baharu! Terokai empat sektor ekonomi, cari bukti tersembunyi, jawab soalan dan buka laluan menuju gelaran DETEKTIF EKONOMI HEBAT.</p>
-    <div class="hero-buttons">
-      <button class="btn" onclick="document.getElementById('peta').scrollIntoView({behavior:'smooth'})">🚀 Mula Pengembaraan</button>
-      <button class="btn secondary" onclick="listen('Selamat datang detektif! Baca petunjuk setiap misi, jawab soalan dengan betul dan kumpulkan lencana untuk membuka cabaran akhir.')">🔊 Dengar arahan</button>
-    </div>
+<header class="topbar">
+  <div class="brand">🕵️ MISI EKONOMI MALAYSIA</div>
+  <div class="controls">
+    <button class="small-btn" id="musicBtn" onclick="toggleMusic()">
+      🎵 Muzik: OFF
+    </button>
+    <button class="small-btn" id="soundBtn" onclick="toggleSound()">
+      🔊 Efek: ON
+    </button>
   </div>
 </header>
 
-<main>
-<section class="section">
-  <div class="progress-card">
-    <div class="progress-head">
-      <strong>🗺️ Kemajuan Pengembaraan</strong>
-      <span id="progressText">0 daripada 5 lencana</span>
-    </div>
-    <div class="bar"><div class="bar-fill" id="progressFill"></div></div>
-    <p style="margin:10px 0 0;color:#718075;font-size:.88rem">Baca maklumat dahulu. Setiap jawapan yang betul membuka langkah seterusnya.</p>
-  </div>
-</section>
+<main class="container">
 
-<section class="section" id="peta">
-  <div class="heading">
-    <div><div class="tag">Tahap 01 · Peta Pengembaraan</div><h2>Pilih Misi Kamu!</h2></div>
-    <p>Selesaikan empat misi mengikut turutan untuk membuka cabaran terakhir.</p>
-  </div>
-  <div class="map">
-    <div class="map-title">
-      <h2>🌏 PETA EKONOMI MALAYSIA</h2>
-      <p>Empat sektor · Empat petunjuk · Satu matlamat</p>
-    </div>
-    <div class="map-grid" id="levelGrid">
-      <button class="level l1 current" data-level="0" onclick="startLevel(0)">
-        <div class="level-top"><span class="num">MISI 01</span><span class="lock">🔓</span></div>
-        <span class="emoji">🌾</span><h3>Ladang Ilmu</h3>
-        <p>Pertanian</p><div class="level-foot">Cari bukti tanaman →</div>
-      </button>
-      <button class="level l2" data-level="1" disabled onclick="startLevel(1)">
-        <div class="level-top"><span class="num">MISI 02</span><span class="lock">🔒</span></div>
-        <span class="emoji">🏭</span><h3>Kilang Pintar</h3>
-        <p>Perindustrian</p><div class="level-foot">Buka selepas Misi 01</div>
-      </button>
-      <button class="level l3" data-level="2" disabled onclick="startLevel(2)">
-        <div class="level-top"><span class="num">MISI 03</span><span class="lock">🔒</span></div>
-        <span class="emoji">🚢</span><h3>Pelabuhan Rahsia</h3>
-        <p>Perdagangan</p><div class="level-foot">Buka selepas Misi 02</div>
-      </button>
-      <button class="level l4" data-level="3" disabled onclick="startLevel(3)">
-        <div class="level-top"><span class="num">MISI 04</span><span class="lock">🔒</span></div>
-        <span class="emoji">🏝️</span><h3>Pulau Misteri</h3>
-        <p>Pelancongan</p><div class="level-foot">Buka selepas Misi 03</div>
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">🎮 PERMAINAN PEMBELAJARAN SEJARAH TAHUN 6</span>
+      <div class="hero-emoji">🗺️🔎🌟</div>
+      <h1>Misi Bongkar<br>Ekonomi Malaysia!</h1>
+      <p>
+        Detektif muda, Malaysia memerlukan bantuan kamu!
+        Terokai empat sektor ekonomi, kumpulkan ilmu, jawab soalan
+        dan buka laluan menuju gelaran Detektif Ekonomi Terhebat!
+      </p>
+      <button class="main-btn yellow" onclick="startAdventure()">
+        🚀 MULAKAN MISI
       </button>
     </div>
-    <div class="tip">💡 Tip: setiap misi mengandungi fail maklumat dan soalan untuk membuka laluan seterusnya.</div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="game">
-  <div class="panel" id="gamePanel" aria-live="polite"></div>
-</section>
-
-<section class="section" id="boss">
-  <div class="boss">
-    <div class="tag">Tahap Akhir · Cabaran Master</div>
-    <h2>🐉 BOSS: Penjaga Ekonomi</h2>
-    <div class="heading">
-      <p>Penjaga ini hanya akan melepaskan sijil detektif kepada mereka yang dapat menghubungkan bukti daripada semua sektor.</p>
+  <section class="stats" aria-label="Statistik permainan">
+    <div class="stat">
+      <div class="stat-label">⭐ JUMLAH MATA</div>
+      <div class="stat-value" id="score">0</div>
     </div>
-    <div id="bossLock" class="unlock-tip">🔒 Selesaikan keempat-empat misi untuk membuka cabaran akhir.</div>
-    <form id="bossForm" style="display:none">
-      <div id="bossQuestions"></div>
-      <button class="btn boss-submit" type="submit">⚡ Serang dengan Ilmu!</button>
-    </form>
-    <div class="result" id="bossResult" aria-live="polite"></div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="reflection">
-    <div class="tag">Misi Bonus · Refleksi</div>
-    <h3>📓 Diari Detektif</h3>
-    <p>Apakah perkara baharu yang kamu pelajari? Bagaimanakah sektor ekonomi menyumbang kepada kemajuan Malaysia?</p>
-    <textarea id="diary" placeholder="Tulis penemuan kamu di sini..."></textarea>
-    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn" onclick="saveDiary()">💾 Simpan catatan</button>
-      <button class="btn secondary" onclick="listen(document.getElementById('diary').value || 'Sila tulis refleksi kamu dahulu.')">🔊 Dengar catatan</button>
+    <div class="stat">
+      <div class="stat-label">🏅 LENCANA</div>
+      <div class="stat-value" id="badges">0/5</div>
     </div>
-    <p id="diaryMessage" aria-live="polite"></p>
-  </div>
-</section>
+    <div class="stat">
+      <div class="stat-label">🗝️ MISI SELESAI</div>
+      <div class="stat-value" id="progressText">0/4</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <div>
+        <h2>🧭 Peta Pengembaraan</h2>
+        <p>Selesaikan satu misi untuk membuka misi seterusnya.</p>
+      </div>
+      <span class="map-label">📍 4 MISI + 1 BOSS</span>
+    </div>
+
+    <div class="map">
+      <span class="map-label">🗺️ LALUAN DETEKTIF</span>
+      <div class="levels" id="levels"></div>
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="learningPanel">
+    <div class="panel-header">
+      <div class="panel-icon" id="panelIcon">🌾</div>
+      <div>
+        <h2 id="panelTitle">Misi Pertanian</h2>
+        <p id="panelSubtitle">Baca maklumat sebelum menjawab soalan.</p>
+      </div>
+    </div>
+
+    <div class="info-banner" id="intro"></div>
+    <div class="info-grid" id="infoGrid"></div>
+
+    <div class="quiz-box" id="quizBox">
+      <div class="quiz-label">🔐 UJIAN DETEKTIF</div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="quiz-actions">
+        <button class="main-btn hidden" id="nextBtn" onclick="nextQuestion()">
+          Teruskan →
+        </button>
+        <button class="small-btn" onclick="backToMap()">🗺️ Kembali ke peta</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="boss locked-boss" id="bossPanel">
+    <div class="eyebrow">👑 CABARAN TERAKHIR</div>
+    <h2>🐉 Boss Terakhir: Penjaga Ekonomi</h2>
+    <p id="bossDescription">
+      Selesaikan keempat-empat misi sektor ekonomi untuk membuka cabaran terakhir!
+    </p>
+    <button class="main-btn" id="bossStart" onclick="startBoss()" disabled>
+      🔒 Misi belum dibuka
+    </button>
+
+    <div class="quiz-box hidden" id="bossQuiz">
+      <div class="quiz-label" id="bossCount">CABARAN 1/5</div>
+      <div class="question" id="bossQuestion"></div>
+      <div class="options" id="bossOptions"></div>
+      <div class="feedback" id="bossFeedback" role="status" aria-live="polite"></div>
+      <div class="quiz-actions">
+        <button class="main-btn hidden" id="bossNext" onclick="nextBossQuestion()">
+          Soalan seterusnya →
+        </button>
+      </div>
+    </div>
+    <div id="certificateArea"></div>
+  </section>
+
+  <section class="reflection">
+    <h2>💭 Jurnal Detektif</h2>
+    <p>Apakah ilmu baharu yang kamu pelajari daripada misi ini?</p>
+    <textarea id="reflection" placeholder="Saya belajar bahawa..."></textarea>
+    <div style="margin-top:12px">
+      <button class="main-btn" onclick="saveReflection()">📝 Simpan refleksi</button>
+    </div>
+    <p id="reflectionFeedback" aria-live="polite"></p>
+  </section>
+
+  <footer>
+    🌟 Belajar sambil bermain, meneroka sambil berfikir!<br>
+    Misi Bongkar Ekonomi Malaysia · Sejarah Tahun 6
+  </footer>
 </main>
 
-<footer>
-  <strong>🎖️ MISI BONGKAR EKONOMI MALAYSIA</strong>
-  <p>Sejarah Tahun 6 · Belajar sambil bermain · Teroka, fikir dan buktikan!</p>
-  <small>Bahan pembelajaran digital. Semak fakta sejarah dan pencapaian khusus dengan buku teks serta panduan guru.</small>
-</footer>
-<div class="toast" id="toast" role="status"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="confetti"></div>
 
 <script>
-const levels = [
-{
- name:"Ladang Ilmu",sector:"Pertanian",emoji:"🌾",color:"#fff0a7",
- story:"Kamu tiba di sebuah ladang. Penduduk memerlukan makanan dan bahan mentah. Cari tahu bagaimana pertanian membantu negara!",
- facts:[
-  ["📜 Petunjuk sejarah","Antara kegiatan ekonomi awal di Tanah Melayu ialah pertanian, termasuk penanaman padi dan tanaman dagangan. Kegiatan berbeza mengikut tempat dan zaman."],
-  ["🌱 Kegiatan ekonomi","Contohnya penanaman padi, getah dan kelapa sawit serta kegiatan perikanan."],
-  ["💰 Sumbangan","Pertanian membekalkan makanan dan bahan mentah, menyediakan pekerjaan serta menyokong industri pemprosesan."]
- ],
- words:["Padi","Getah","Kelapa sawit","Perikanan"],
- question:"Seorang petani menanam padi untuk menghasilkan beras. Apakah sektor ekonomi yang terlibat?",
- options:["Perdagangan","Pertanian","Pelancongan","Perindustrian"],
- answer:1,
- explain:"Penanaman padi ialah kegiatan pertanian dan membekalkan makanan kepada masyarakat."
-},
-{
- name:"Kilang Pintar",sector:"Perindustrian",emoji:"🏭",color:"#a8e5f1",
- story:"Mesin di kilang sedang berhenti! Kamu perlu mengenal pasti bagaimana bahan mentah diproses menjadi barangan.",
- facts:[
-  ["📜 Petunjuk sejarah","Perkembangan ekonomi Malaysia melibatkan kegiatan memproses bahan mentah dan pengembangan sektor pembuatan. Jenis industri berubah mengikut masa dan teknologi."],
-  ["⚙️ Kegiatan ekonomi","Contohnya pemprosesan makanan, pembuatan komponen elektronik, pemasangan kenderaan dan pemprosesan petroleum."],
-  ["💰 Sumbangan","Perindustrian menambah nilai bahan mentah, mewujudkan pekerjaan dan menghasilkan barangan untuk pasaran tempatan serta luar negara."]
- ],
- words:["Pemprosesan","Pembuatan","Mesin","Teknologi"],
- question:"Apakah contoh kegiatan dalam sektor perindustrian?",
- options:["Membuat komponen elektronik","Menanam padi di sawah","Melawat muzium","Membeli tiket pelancongan"],
- answer:0,
- explain:"Pembuatan komponen elektronik ialah aktiviti perindustrian kerana barangan dihasilkan melalui proses pembuatan."
-},
-{
- name:"Pelabuhan Rahsia",sector:"Perdagangan",emoji:"🚢",color:"#ffc6ad",
- story:"Sebuah kapal membawa barangan Malaysia ke pasaran antarabangsa. Bantu kapten mengenal pasti kegiatan perdagangan!",
- facts:[
-  ["📜 Petunjuk sejarah","Kegiatan perdagangan telah berkembang melalui pertukaran barangan dan aktiviti pelabuhan. Kedudukan strategik Tanah Melayu turut menyokong perdagangan serantau."],
-  ["🚢 Kegiatan ekonomi","Eksport bermaksud menjual atau menghantar barangan ke negara lain. Import pula bermaksud membeli atau membawa masuk barangan dari negara lain."],
-  ["💰 Sumbangan","Perdagangan meluaskan pasaran produk, menghubungkan penjual dengan pembeli dan menyokong pekerjaan dalam perniagaan serta logistik."]
- ],
- words:["Eksport","Import","Jual beli","Logistik"],
- question:"Sebuah syarikat Malaysia menghantar produk untuk dijual di negara lain. Apakah kegiatan ini?",
- options:["Import","Eksport","Pertanian","Hospitaliti"],
- answer:1,
- explain:"Eksport ialah kegiatan menjual atau menghantar barangan dan perkhidmatan ke negara lain."
-},
-{
- name:"Pulau Misteri",sector:"Pelancongan",emoji:"🏝️",color:"#d8c8ff",
- story:"Pelawat tiba di pulau yang indah. Jejaki bagaimana tarikan alam semula jadi dan warisan boleh membantu ekonomi tempatan.",
- facts:[
-  ["📜 Petunjuk sejarah","Keindahan alam, tempat bersejarah, kepelbagaian budaya dan kemudahan pengangkutan membantu menyokong perkembangan pelancongan Malaysia."],
-  ["🧳 Kegiatan ekonomi","Contohnya perkhidmatan penginapan, pemandu pelancong, lawatan warisan dan aktiviti rekreasi."],
-  ["💰 Sumbangan","Pelancongan menyokong pekerjaan dan pendapatan dalam perniagaan penginapan, makanan, pengangkutan serta perkhidmatan tempatan."]
- ],
- words:["Pulau","Warisan","Penginapan","Rekreasi"],
- question:"Mengapakah kedatangan pelancong boleh membantu penduduk setempat?",
- options:["Pelancong tidak menggunakan sebarang perkhidmatan","Semua kedai perlu ditutup","Pelancong menggunakan penginapan, makanan dan perkhidmatan","Pelancongan menggantikan semua sektor ekonomi"],
- answer:2,
- explain:"Pelancong menggunakan pelbagai perkhidmatan tempatan, lalu menyokong perniagaan, pekerjaan dan pendapatan."
-}
-];
+/* ======================================
+   1. DATA PEMBELAJARAN DAN SOALAN
+====================================== */
 
-const bossData=[
- {q:"1. Antara berikut, yang manakah menunjukkan sumbangan sektor pertanian?",o:["Membekalkan makanan dan bahan mentah","Mengurus semua urusan hotel","Mengendalikan semua eksport","Membina semua kapal dagang"],a:0},
- {q:"2. Bahan mentah diproses untuk menghasilkan barangan. Sektor manakah yang terlibat secara langsung?",o:["Pelancongan","Perindustrian","Perdagangan sahaja","Pertanian sahaja"],a:1},
- {q:"3. Apakah perbezaan antara eksport dengan import?",o:["Eksport membawa masuk, import menghantar keluar","Kedua-duanya bermaksud menanam tanaman","Eksport menjual ke luar negara, import membawa masuk dari luar negara","Kedua-duanya hanya merujuk kepada pelancongan"],a:2},
- {q:"4. Sebuah kampung mempunyai tempat warisan yang menarik dan penduduk menawarkan penginapan kepada pelawat. Apakah hubungan ekonomi yang dapat dilihat?",o:["Pelancongan boleh menyokong pendapatan perniagaan tempatan","Warisan hanya berkaitan dengan perindustrian","Penginapan menghentikan kegiatan perdagangan","Pelancongan tidak memerlukan pekerja"],a:0},
- {q:"5. Mengapakah pelbagai sektor ekonomi penting kepada Malaysia?",o:["Semua sektor melakukan perkara yang sama","Setiap sektor boleh menyumbang dengan cara berbeza dan saling melengkapi","Negara hanya memerlukan satu sektor","Kemajuan ekonomi tidak berkaitan dengan pekerjaan"],a:1}
-];
-
-let unlocked=1;
-let completed=new Set();
-let score=0;
-let earned=new Set();
-let activeLevel=null;
-let answered=false;
-let selectedLeft=null;
-let selectedRight=null;
-let bossCompleted=false;
-
-function escapeHTML(str){
- return String(str).replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
-function notify(text){
- const el=document.getElementById("toast");
- el.textContent=text;el.style.display="block";
- clearTimeout(notify.timer);
- notify.timer=setTimeout(()=>el.style.display="none",2500);
-}
-function listen(text){
- if(!("speechSynthesis" in window)){notify("Audio tidak disokong oleh pelayar ini.");return}
- if(!text){notify("Tiada teks untuk dibaca.");return}
- speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);
- u.lang="ms-MY";u.rate=.92;speechSynthesis.speak(u);
-}
-function renderMap(){
- document.querySelectorAll("[data-level]").forEach(btn=>{
-  const n=Number(btn.dataset.level);
-  const done=completed.has(n);
-  const open=n<unlocked;
-  btn.disabled=!open;
-  btn.classList.toggle("done",done);
-  btn.classList.toggle("current",open&&!done);
-  btn.querySelector(".lock").textContent=done?"✅":open?"🔓":"🔒";
-  btn.querySelector(".level-foot").textContent=done?"Misi selesai!":open?"Mulakan misi →":"Selesaikan misi sebelumnya";
- });
- document.getElementById("score").textContent=score;
- document.getElementById("badges").textContent=earned.size;
- document.getElementById("progressText").textContent=earned.size+" daripada 5 lencana";
- document.getElementById("progressFill").style.width=(earned.size/5*100)+"%";
- document.getElementById("bossLock").textContent=completed.size===4?
-  "🔓 Semua misi selesai! Cabaran akhir sudah dibuka.": "🔒 Selesaikan keempat-empat misi untuk membuka cabaran akhir.";
- document.getElementById("bossForm").style.display=completed.size===4&&!bossCompleted?"block":"none";
- if(completed.size===4&&!bossCompleted)renderBoss();
-}
-function startLevel(index){
- if(index>=unlocked||index<0||index>3)return;
- activeLevel=index;answered=false;
- const x=levels[index];
- const panel=document.getElementById("gamePanel");
- panel.classList.add("show");
- panel.innerHTML=`
-  <div class="panel-top">
-   <div><div class="stage-label">MISI ${String(index+1).padStart(2,"0")} / 04</div>
-    <h2>${x.emoji} ${x.name}</h2></div>
-   <button class="btn secondary" onclick="closeLevel()">✕ Tutup</button>
-  </div>
-  <p class="panel-intro">${x.story}</p>
-  <div class="clue" style="background:${x.color}">
-   <h3>🕵️ Fail Petunjuk: Baca sebelum menjawab!</h3>
-   ${x.facts.map(f=>`<p><strong>${f[0]}</strong><br>${f[1]}</p>`).join("")}
-   <div class="fact-chips">${x.words.map(w=>`<span>${w}</span>`).join("")}</div>
-  </div>
-  <div class="unlock-tip">📚 <strong>Cabaran kamu:</strong> Gunakan maklumat dalam fail ini untuk menjawab soalan. Jawapan betul akan membuka misi seterusnya.</div>
-  <div class="quiz">
-   <div class="tag">Uji minda · Misi ${index+1}</div>
-   <h3>🎯 Cari jawapan yang tepat!</h3>
-   <div class="quiz-question">${x.question}</div>
-   <div class="answers">${x.options.map((o,i)=>`<button class="answer" onclick="checkAnswer(${i},this)">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
-   <div class="feedback" id="levelFeedback" aria-live="polite"></div>
-   <div class="quiz-actions" id="nextActions"></div>
-  </div>
-  <button class="btn secondary" style="margin-top:15px" onclick="listen(${JSON.stringify(x.facts.map(f=>f[0]+". "+f[1]).join(" "))})">🔊 Dengar fail petunjuk</button>`;
- panel.scrollIntoView({behavior:"smooth",block:"start"});
-}
-function closeLevel(){
- document.getElementById("gamePanel").classList.remove("show");
- document.getElementById("peta").scrollIntoView({behavior:"smooth"});
-}
-function checkAnswer(choice,button){
- if(answered)return;
- const x=levels[activeLevel];
- const feedback=document.getElementById("levelFeedback");
- const buttons=document.querySelectorAll("#gamePanel .answer");
- if(choice===x.answer){
-  answered=true;
-  buttons.forEach(b=>b.disabled=true);
-  button.classList.add("correct");
-  feedback.className="feedback good";
-  feedback.textContent="🎉 Tepat! "+x.explain;
-  if(!completed.has(activeLevel)){
-   completed.add(activeLevel);
-   earned.add("level"+activeLevel);
-   score+=100;
-   if(activeLevel+1<4)unlocked=Math.max(unlocked,activeLevel+2);
-   burst();
+const missions = [
+  {
+    id: "pertanian",
+    icon: "🌾",
+    name: "Ladang Ilmu",
+    sector: "Sektor Pertanian",
+    color: "#dff7e7",
+    description: "Terokai hasil bumi dan kegiatan pertanian Malaysia.",
+    intro: "Selamat datang ke Ladang Ilmu! Sektor pertanian membekalkan bahan makanan dan bahan mentah serta menyokong kehidupan rakyat.",
+    meaning: "Sektor pertanian melibatkan kegiatan mengusahakan tanah dan sumber semula jadi untuk menghasilkan tanaman serta hasil ternakan.",
+    activities: [
+      "Menanam padi, kelapa sawit, getah dan koko.",
+      "Mengusahakan tanaman buah-buahan dan sayur-sayuran.",
+      "Menjalankan kegiatan penternakan."
+    ],
+    examples: [
+      "Padi — sumber beras.",
+      "Kelapa sawit — menghasilkan minyak sawit.",
+      "Getah — bahan mentah untuk pelbagai produk.",
+      "Penternakan — membekalkan daging, susu dan telur."
+    ],
+    contributions: [
+      "Membekalkan makanan kepada penduduk.",
+      "Menyediakan peluang pekerjaan.",
+      "Membekalkan bahan mentah kepada industri.",
+      "Menyumbang kepada pendapatan negara melalui eksport."
+    ],
+    question: "Antara berikut, yang manakah contoh kegiatan sektor pertanian?",
+    options: [
+      "Menghasilkan kereta di kilang",
+      "Menanam padi untuk menghasilkan beras",
+      "Menguruskan pelayaran kapal dagang",
+      "Mengendalikan lawatan ke muzium"
+    ],
+    answer: 1,
+    explanation: "Betul! Penanaman padi ialah kegiatan pertanian yang membekalkan makanan kepada penduduk."
+  },
+  {
+    id: "perindustrian",
+    icon: "🏭",
+    name: "Kilang Pintar",
+    sector: "Sektor Perindustrian",
+    color: "#e3efff",
+    description: "Kenali proses mengubah bahan mentah menjadi produk.",
+    intro: "Selamat datang ke Kilang Pintar! Sektor perindustrian memproses bahan mentah dan menghasilkan barangan yang diperlukan oleh masyarakat.",
+    meaning: "Sektor perindustrian melibatkan pemprosesan bahan mentah dan pembuatan barangan menggunakan tenaga kerja, mesin dan teknologi.",
+    activities: [
+      "Memproses kelapa sawit menjadi minyak sawit.",
+      "Menghasilkan kereta dan peralatan elektronik.",
+      "Memproses makanan dan menghasilkan barangan pengguna."
+    ],
+    examples: [
+      "Kilang makanan — menghasilkan makanan yang diproses.",
+      "Kilang automotif — memasang kenderaan.",
+      "Kilang elektronik — menghasilkan komponen dan peralatan elektronik."
+    ],
+    contributions: [
+      "Menambah nilai bahan mentah.",
+      "Mewujudkan peluang pekerjaan.",
+      "Menggalakkan penggunaan teknologi.",
+      "Meningkatkan pengeluaran dan pendapatan negara."
+    ],
+    question: "Apakah sumbangan penting sektor perindustrian?",
+    options: [
+      "Mengurangkan semua kegiatan perdagangan",
+      "Menggantikan semua kegiatan pertanian",
+      "Menambah nilai bahan mentah menjadi barangan",
+      "Menghapuskan keperluan teknologi"
+    ],
+    answer: 2,
+    explanation: "Tepat! Perindustrian memproses bahan mentah untuk menghasilkan barangan yang mempunyai nilai tambah."
+  },
+  {
+    id: "perdagangan",
+    icon: "🚢",
+    name: "Pelabuhan Rahsia",
+    sector: "Sektor Perdagangan",
+    color: "#fff0d5",
+    description: "Bongkar rahsia jual beli dan perdagangan antarabangsa.",
+    intro: "Selamat datang ke Pelabuhan Rahsia! Perdagangan membantu barangan bergerak dari pengeluar kepada pengguna di dalam dan luar negara.",
+    meaning: "Sektor perdagangan melibatkan kegiatan jual beli barangan dan perkhidmatan antara individu, perniagaan atau negara.",
+    activities: [
+      "Menjual dan membeli barangan di pasar atau kedai.",
+      "Mengeksport barangan ke negara lain.",
+      "Mengimport barangan yang diperlukan dari luar negara."
+    ],
+    examples: [
+      "Eksport — menjual barangan ke luar negara.",
+      "Import — membeli barangan dari luar negara.",
+      "Pelabuhan dan pengangkutan — membantu pergerakan barangan."
+    ],
+    contributions: [
+      "Meluaskan pasaran produk tempatan.",
+      "Memenuhi keperluan pengguna.",
+      "Menjana pendapatan dan peluang pekerjaan.",
+      "Mengukuhkan hubungan ekonomi dengan negara lain."
+    ],
+    question: "Apakah maksud eksport?",
+    options: [
+      "Menjual barangan ke luar negara",
+      "Membeli barangan dari luar negara",
+      "Menanam tanaman untuk kegunaan sendiri sahaja",
+      "Menghasilkan barangan di dalam kilang sahaja"
+    ],
+    answer: 0,
+    explanation: "Hebat! Eksport bermaksud menjual barangan atau perkhidmatan ke negara lain."
+  },
+  {
+    id: "pelancongan",
+    icon: "🏝️",
+    name: "Pulau Misteri",
+    sector: "Sektor Pelancongan",
+    color: "#e0f7ff",
+    description: "Terokai tarikan Malaysia yang menarik pelancong.",
+    intro: "Selamat datang ke Pulau Misteri! Malaysia mempunyai pantai, pulau, warisan budaya dan tempat bersejarah yang menarik pengunjung.",
+    meaning: "Sektor pelancongan melibatkan aktiviti perjalanan dan lawatan untuk rekreasi, pendidikan, budaya atau tujuan lain.",
+    activities: [
+      "Melawat tempat bersejarah dan muzium.",
+      "Menikmati pantai, pulau dan keindahan alam semula jadi.",
+      "Menyertai aktiviti kebudayaan dan menikmati makanan tempatan."
+    ],
+    examples: [
+      "Melaka — terkenal dengan warisan sejarah.",
+      "Pulau Langkawi — tarikan alam semula jadi.",
+      "Sabah — terkenal dengan keindahan alam dan Gunung Kinabalu.",
+      "Kuala Lumpur — mempunyai pelbagai tarikan bandar."
+    ],
+    contributions: [
+      "Menjana pendapatan daripada perkhidmatan pelancongan.",
+      "Mewujudkan pekerjaan dalam hotel, pengangkutan dan perkhidmatan.",
+      "Mempromosikan budaya serta warisan Malaysia.",
+      "Membantu perniagaan dan komuniti tempatan."
+    ],
+    question: "Bagaimanakah sektor pelancongan menyumbang kepada ekonomi negara?",
+    options: [
+      "Menghalang pelawat mengenali budaya tempatan",
+      "Mengurangkan semua peluang pekerjaan",
+      "Menghentikan kegiatan perniagaan tempatan",
+      "Menjana pendapatan melalui perkhidmatan pelancongan"
+    ],
+    answer: 3,
+    explanation: "Tahniah! Pelancongan menjana pendapatan dan membuka peluang pekerjaan kepada masyarakat."
   }
-  document.getElementById("nextActions").innerHTML=
-   `<button class="btn" onclick="finishLevel()">🏅 Tuntut lencana & teruskan</button>`;
-  renderMap();
- }else{
-  button.classList.add("wrong");
-  feedback.className="feedback bad";
-  feedback.textContent="🧐 Belum tepat! Baca semula fail petunjuk dan cuba lagi.";
- }
+];
+
+const bossQuestions = [
+  {
+    q: "Sektor manakah membekalkan bahan mentah untuk industri?",
+    o: ["Pelancongan", "Pertanian", "Perdagangan", "Hiburan"],
+    a: 1,
+    e: "Pertanian membekalkan bahan mentah seperti getah dan kelapa sawit."
+  },
+  {
+    q: "Apakah perbezaan antara import dengan eksport?",
+    o: [
+      "Kedua-duanya bermaksud menanam tanaman",
+      "Import ialah menghasilkan produk; eksport ialah menyimpan produk",
+      "Import membeli dari luar negara; eksport menjual ke luar negara",
+      "Kedua-duanya bermaksud melawat negara lain"
+    ],
+    a: 2,
+    e: "Import ialah membeli dari luar negara, manakala eksport ialah menjual ke luar negara."
+  },
+  {
+    q: "Apakah contoh kegiatan perindustrian?",
+    o: [
+      "Mendaki gunung",
+      "Melawat muzium",
+      "Menanam padi",
+      "Memproses bahan mentah menjadi produk"
+    ],
+    a: 3,
+    e: "Perindustrian melibatkan pemprosesan bahan mentah dan pembuatan barangan."
+  },
+  {
+    q: "Apakah manfaat pelancongan kepada masyarakat tempatan?",
+    o: [
+      "Mewujudkan peluang pekerjaan dan pendapatan",
+      "Menghapuskan semua perniagaan",
+      "Mengurangkan keperluan perkhidmatan",
+      "Menghalang promosi budaya"
+    ],
+    a: 0,
+    e: "Pelancongan membantu hotel, pemandu pelancong, pengusaha makanan dan perniagaan tempatan."
+  },
+  {
+    q: "Mengapakah pelbagai sektor ekonomi penting kepada Malaysia?",
+    o: [
+      "Supaya negara bergantung pada satu kegiatan sahaja",
+      "Supaya semua sumber tidak digunakan",
+      "Kerana setiap sektor menyumbang dengan cara yang berbeza",
+      "Kerana semua sektor mempunyai kegiatan yang sama"
+    ],
+    a: 2,
+    e: "Pelbagai sektor menyediakan barangan, perkhidmatan, pekerjaan dan pendapatan untuk pembangunan negara."
+  }
+];
+
+/* ======================================
+   2. STATUS PERMAINAN
+====================================== */
+
+let score = 0;
+let completed = new Set();
+let earned = new Set();
+let currentMission = 0;
+let answered = false;
+let bossIndex = 0;
+let bossScore = 0;
+let bossAnswered = false;
+let bossFinished = false;
+
+/* ======================================
+   3. AUDIO: MUZIK DAN EFEK
+====================================== */
+
+let audioCtx = null;
+let musicOn = false;
+let soundOn = true;
+let musicTimer = null;
+let musicStep = 0;
+
+const melody = [
+  523.25, 659.25, 783.99, 659.25,
+  587.33, 698.46, 880.00, 698.46,
+  523.25, 659.25, 783.99, 1046.50,
+  880.00, 783.99, 659.25, 587.33
+];
+
+function getAudio() {
+  if (!audioCtx) {
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) {
+      showToast("Audio tidak disokong oleh pelayar ini.");
+      return null;
+    }
+
+    audioCtx = new AudioContextClass();
+  }
+
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+
+  return audioCtx;
 }
-function finishLevel(){
- const index=activeLevel;
- if(index<3){
-  notify("🏅 Lencana "+levels[index].sector+" diperoleh!");
-  startLevel(index+1);
- }else{
-  document.getElementById("gamePanel").classList.remove("show");
-  document.getElementById("boss").scrollIntoView({behavior:"smooth"});
-  notify("🏅 Empat misi selesai! Cabaran akhir dibuka.");
- }
- renderMap();
+
+function playTone(freq, duration = 0.15, type = "sine", volume = 0.04) {
+  if (!soundOn) return;
+
+  const ctx = getAudio();
+  if (!ctx) return;
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+  gain.gain.setValueAtTime(Math.max(volume, 0.001), ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    ctx.currentTime + duration
+  );
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
 }
-function renderBoss(){
- document.getElementById("bossQuestions").innerHTML=bossData.map((item,i)=>`
-  <div class="boss-q">
-   <p>${item.q}</p>
-   ${item.o.map((o,j)=>`<label><input type="radio" name="boss${i}" value="${j}" required>${String.fromCharCode(65+j)}. ${o}</label>`).join("")}
-   <div class="feedback" id="bossFeedback${i}"></div>
-  </div>`).join("");
+
+function playMusicNote() {
+  if (!musicOn) return;
+
+  const ctx = getAudio();
+  if (!ctx) return;
+
+  const freq = melody[musicStep % melody.length];
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = "sine";
+  osc.frequency.value = freq;
+
+  gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.012, ctx.currentTime + 0.08);
+  gain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.38);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+  osc.stop(ctx.currentTime + 0.4);
+
+  musicStep++;
 }
-document.getElementById("bossForm").addEventListener("submit",function(e){
- e.preventDefault();
- let points=0;
- bossData.forEach((q,i)=>{
-  const choice=document.querySelector(`input[name="boss${i}"]:checked`);
-  const correct=choice&&Number(choice.value)===q.a;
-  if(correct)points++;
-  const f=document.getElementById("bossFeedback"+i);
-  f.className="feedback "+(correct?"good":"bad");
-  f.textContent=correct?"✓ Jawapan tepat!":"Petunjuk: semak semula maklumat berkaitan dalam misi.";
- });
- const result=document.getElementById("bossResult");
- result.style.display="block";
- result.innerHTML=points>=4?
-  `<div class="trophy">🏆</div><h3>TAHNIAH, DETEKTIF HEBAT!</h3><p>Skor cabaran akhir: ${points}/5. Kamu berjaya menewaskan Penjaga Ekonomi dan memperoleh sijil detektif!</p><p>🎖️ Lencana Master diperoleh.</p><button class="btn" onclick="printCertificate()">🖨️ Cetak Sijil</button>`:
-  `<div class="trophy">🧭</div><h3>Hampir Berjaya!</h3><p>Skor kamu ${points}/5. Baca semula petunjuk daripada empat misi, kemudian cuba cabaran akhir sekali lagi.</p><button class="btn" onclick="retryBoss()">🔁 Cuba Lagi</button>`;
- if(points>=4){
-  bossCompleted=true;earned.add("master");score+=points*20;
-  document.getElementById("bossForm").style.display="none";
-  burst();
- }
- renderMap();
- result.scrollIntoView({behavior:"smooth",block:"center"});
-});
-function retryBoss(){
- document.getElementById("bossResult").style.display="none";
- document.getElementById("bossForm").reset();
- document.querySelectorAll("#bossQuestions .feedback").forEach(f=>f.textContent="");
- document.getElementById("bossForm").style.display="block";
+
+function toggleMusic() {
+  const ctx = getAudio();
+  if (!ctx) return;
+
+  musicOn = !musicOn;
+  const btn = document.getElementById("musicBtn");
+
+  if (musicOn) {
+    btn.textContent = "🎵 Muzik: ON";
+    playMusicNote();
+    musicTimer = setInterval(playMusicNote, 420);
+  } else {
+    btn.textContent = "🎵 Muzik: OFF";
+    clearInterval(musicTimer);
+    musicTimer = null;
+  }
 }
-function printCertificate(){
- const win=window.open("","_blank","width=800,height=600");
- if(!win){notify("Pelayar menyekat tetingkap cetakan. Benarkan pop-up untuk mencetak.");return}
- win.document.write(`<!DOCTYPE html><html lang="ms"><head><meta charset="UTF-8"><title>Sijil Detektif Ekonomi</title>
- <style>body{font-family:Arial,sans-serif;text-align:center;padding:60px;border:12px double #344875;color:#25345b}
- h1{font-size:36px}h2{font-size:26px;color:#8870bd}p{font-size:18px;line-height:1.8}.medal{font-size:65px}</style></head>
- <body><div class="medal">🏆</div><h2>SIJIL PENCAPAIAN</h2><h1>DETEKTIF EKONOMI HEBAT</h1>
- <p>Dianugerahkan kepada seorang detektif yang telah menamatkan<br>
- <strong>Misi Bongkar Ekonomi Malaysia</strong><br>dan berjaya menyelesaikan cabaran ekonomi.</p>
- <p>Jumlah skor: ${score} mata</p><p>Tarikh: ${new Date().toLocaleDateString("ms-MY")}</p>
- <p>Teruskan meneroka, berfikir dan belajar!</p><script>window.onload=()=>window.print()<\/script></body></html>`);
- win.document.close();
+
+function toggleSound() {
+  soundOn = !soundOn;
+
+  document.getElementById("soundBtn").textContent =
+    soundOn ? "🔊 Efek: ON" : "🔇 Efek: OFF";
+
+  if (soundOn) playTone(660, 0.12, "triangle", 0.03);
 }
-function saveDiary(){
- const text=document.getElementById("diary").value.trim();
- const msg=document.getElementById("diaryMessage");
- if(!text){msg.textContent="Sila tulis refleksi dahulu.";return}
- msg.textContent="✅ Catatan kamu dipaparkan untuk sesi ini. Ingat: catatan tidak disimpan selepas halaman dimuat semula.";
+
+function clickSound() {
+  playTone(600, 0.07, "triangle", 0.025);
 }
-function burst(){
- const symbols=["⭐","🎉","✨","🌟","🎊"];
- for(let i=0;i<22;i++){
-  const el=document.createElement("span");
-  el.className="confetti";el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-  el.style.left=Math.random()*100+"vw";
-  el.style.animationDelay=Math.random()*.7+"s";
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),3100);
- }
+
+function correctSound() {
+  playTone(659.25, 0.13, "sine", 0.05);
+  setTimeout(() => playTone(783.99, 0.16, "sine", 0.05), 100);
+  setTimeout(() => playTone(1046.5, 0.23, "sine", 0.05), 210);
 }
-renderMap();
+
+function wrongSound() {
+  playTone(330, 0.14, "triangle", 0.03);
+  setTimeout(() => playTone(280, 0.16, "triangle", 0.025), 130);
+}
+
+function levelUpSound() {
+  [523.25, 659.25, 783.99, 1046.5].forEach((freq, index) => {
+    setTimeout(() => playTone(freq, 0.28, "sine", 0.05), index * 125);
+  });
+}
+
+/* ======================================
+   4. PETA DAN STATISTIK
+====================================== */
+
+function renderLevels() {
+  const container = document.getElementById("levels");
+  container.innerHTML = "";
+
+  missions.forEach((mission, index) => {
+    const unlocked = index === 0 || completed.has(missions[index - 1].id);
+    const done = completed.has(mission.id);
+    const card = document.createElement("div");
+
+    card.className = "level" +
+      (unlocked ? " unlocked" : " locked") +
+      (done ? " completed" : "") +
+      (currentMission === index && !done ? " current" : "");
+
+    card.style.background = done ? "#fff9dd" : "white";
+
+    card.innerHTML = `
+      <div class="level-top">
+        <div class="level-icon">${mission.icon}</div>
+        <span class="status">
+          ${done ? "✅ SELESAI" : unlocked ? "🔓 DIBUKA" : "🔒 TERKUNCI"}
+        </span>
+      </div>
+      <div class="level-number">MISI ${index + 1}</div>
+      <h3>${mission.name}</h3>
+      <p>${mission.description}</p>
+      <strong>${done ? "🏅 Lencana diperoleh" : unlocked ? "Terokai misi →" : "Selesaikan misi sebelumnya dahulu"}</strong>
+    `;
+
+    if (unlocked) {
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", "Buka " + mission.name);
+      card.addEventListener("click", () => {
+        clickSound();
+        openMission(index);
+      });
+      card.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openMission(index);
+        }
+      });
+    }
+
+    container.appendChild(card);
+  });
+
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById("score").textContent = score;
+  document.getElementById("badges").textContent = earned.size + "/5";
+  document.getElementById("progressText").textContent = completed.size + "/4";
+
+  document.getElementById("progressBar").style.width =
+    (completed.size / 4 * 100) + "%";
+
+  const bossButton = document.getElementById("bossStart");
+  const bossPanel = document.getElementById("bossPanel");
+  const description = document.getElementById("bossDescription");
+
+  if (completed.size === 4) {
+    bossPanel.classList.remove("locked-boss");
+    bossButton.disabled = bossFinished;
+    bossButton.textContent = bossFinished
+      ? "✅ Cabaran selesai"
+      : "👑 Mulakan cabaran terakhir";
+    description.textContent = bossFinished
+      ? "Kamu telah menamatkan cabaran terakhir!"
+      : "Semua misi selesai! Buktikan penguasaan kamu dalam lima soalan terakhir.";
+  } else {
+    bossPanel.classList.add("locked-boss");
+    bossButton.disabled = true;
+    bossButton.textContent = "🔒 Misi belum dibuka";
+    description.textContent =
+      "Selesaikan keempat-empat misi sektor ekonomi untuk membuka cabaran terakhir!";
+  }
+}
+
+/* ======================================
+   5. PAPARAN MAKLUMAT MISI
+====================================== */
+
+function startAdventure() {
+  clickSound();
+  document.getElementById("levels").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+  showToast("Misi bermula! Pilih lokasi pertama: Ladang Ilmu.");
+}
+
+function openMission(index) {
+  if (index > 0 && !completed.has(missions[index - 1].id)) {
+    showToast("Selesaikan misi sebelumnya dahulu!");
+    return;
+  }
+
+  currentMission = index;
+  const mission = missions[index];
+
+  document.getElementById("learningPanel").classList.add("active");
+  document.getElementById("panelIcon").textContent = mission.icon;
+  document.getElementById("panelTitle").textContent = mission.sector;
+  document.getElementById("panelSubtitle").textContent =
+    "Baca maklumat dan jawab soalan untuk mendapatkan lencana.";
+  document.getElementById("intro").textContent = mission.intro;
+
+  const grid = document.getElementById("infoGrid");
+  grid.innerHTML = `
+    <div class="info-item">
+      <h3>📚 Maksud</h3>
+      <p>${mission.meaning}</p>
+    </div>
+    <div class="info-item">
+      <h3>⚙️ Kegiatan Ekonomi</h3>
+      <ul>${mission.activities.map(item => `<li>${item}</li>`).join("")}</ul>
+    </div>
+    <div class="info-item">
+      <h3>🔎 Contoh</h3>
+      <ul>${mission.examples.map(item => `<li>${item}</li>`).join("")}</ul>
+    </div>
+    <div class="info-item">
+      <h3>🌟 Sumbangan kepada Negara</h3>
+      <ul>${mission.contributions.map(item => `<li>${item}</li>`).join("")}</ul>
+    </div>
+  `;
+
+  renderMissionQuestion();
+  document.getElementById("learningPanel").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function renderMissionQuestion() {
+  const mission = missions[currentMission];
+  const alreadyDone = completed.has(mission.id);
+
+  answered = alreadyDone;
+
+  document.getElementById("question").textContent = mission.question;
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+
+  mission.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option-btn";
+    button.textContent = String.fromCharCode(65 + index) + ". " + option;
+    button.disabled = alreadyDone;
+
+    button.addEventListener("click", () => {
+      answerMission(index, button);
+    });
+
+    options.appendChild(button);
+  });
+
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback";
+  feedback.textContent = "";
+
+  const next = document.getElementById("nextBtn");
+  next.classList.toggle("hidden", !alreadyDone);
+
+  if (alreadyDone) {
+    feedback.textContent = "🏅 Misi ini telah selesai. Kamu boleh meneroka semula maklumatnya.";
+    feedback.classList.add("show", "good");
+    next.textContent = currentMission === 3
+      ? "Lihat cabaran terakhir 👑"
+      : "Kembali ke peta 🗺️";
+  } else {
+    next.textContent = "Teruskan →";
+  }
+}
+
+function answerMission(index, selectedButton) {
+  if (answered) return;
+
+  const mission = missions[currentMission];
+  const buttons = [...document.querySelectorAll("#options .option-btn")];
+  const feedback = document.getElementById("feedback");
+  const next = document.getElementById("nextBtn");
+
+  if (index === mission.answer) {
+    answered = true;
+    buttons.forEach(button => button.disabled = true);
+    selectedButton.classList.add("correct");
+
+    if (!completed.has(mission.id)) {
+      score += 100;
+      completed.add(mission.id);
+      earned.add(mission.id);
+    }
+
+    correctSound();
+    levelUpSound();
+    celebrate();
+
+    feedback.textContent = "🎉 " + mission.explanation + " +100 mata! Lencana misi diperoleh.";
+    feedback.className = "feedback show good";
+
+    next.classList.remove("hidden");
+    next.textContent = currentMission === 3
+      ? "Buka cabaran terakhir 👑"
+      : "Misi seterusnya →";
+
+    renderLevels();
+  } else {
+    selectedButton.classList.add("incorrect");
+    selectedButton.disabled = true;
+    wrongSound();
+
+    feedback.textContent =
+      "💡 Belum tepat! Baca semula maklumat di atas dan cuba pilihan lain.";
+    feedback.className = "feedback show bad";
+  }
+}
+
+function nextQuestion() {
+  clickSound();
+
+  if (currentMission === 3 && completed.size === 4) {
+    backToMap();
+    document.getElementById("bossPanel").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+    showToast("Hebat! Cabaran terakhir telah dibuka.");
+    return;
+  }
+
+  backToMap();
+}
+
+function backToMap() {
+  document.getElementById("learningPanel").classList.remove("active");
+  document.getElementById("levels").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+/* ======================================
+   6. CABARAN TERAKHIR
+====================================== */
+
+function startBoss() {
+  if (completed.size !== 4 || bossFinished) return;
+
+  clickSound();
+  bossIndex = 0;
+  bossScore = 0;
+  bossAnswered = false;
+
+  document.getElementById("bossQuiz").classList.remove("hidden");
+  document.getElementById("certificateArea").innerHTML = "";
+
+  renderBossQuestion();
+
+  document.getElementById("bossQuiz").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function renderBossQuestion() {
+  const item = bossQuestions[bossIndex];
+
+  bossAnswered = false;
+
+  document.getElementById("bossCount").textContent =
+    "CABARAN " + (bossIndex + 1) + "/5";
+
+  document.getElementById("bossQuestion").textContent = item.q;
+
+  const options = document.getElementById("bossOptions");
+  options.innerHTML = "";
+
+  item.o.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option-btn";
+    button.textContent = String.fromCharCode(65 + index) + ". " + option;
+    button.addEventListener("click", () => answerBoss(index, button));
+    options.appendChild(button);
+  });
+
+  const feedback = document.getElementById("bossFeedback");
+  feedback.textContent = "";
+  feedback.className = "feedback";
+
+  document.getElementById("bossNext").classList.add("hidden");
+}
+
+function answerBoss(index, selectedButton) {
+  if (bossAnswered) return;
+
+  bossAnswered = true;
+
+  const item = bossQuestions[bossIndex];
+  const buttons = [...document.querySelectorAll("#bossOptions .option-btn")];
+  const feedback = document.getElementById("bossFeedback");
+
+  buttons.forEach(button => button.disabled = true);
+
+  if (index === item.a) {
+    selectedButton.classList.add("correct");
+    bossScore++;
+    score += 20;
+    correctSound();
+
+    feedback.textContent = "🌟 Betul! " + item.e + " +20 mata.";
+    feedback.className = "feedback show good";
+  } else {
+    selectedButton.classList.add("incorrect");
+    buttons[item.a].classList.add("correct");
+    wrongSound();
+
+    feedback.textContent = "📖 Jawapan yang tepat: " +
+      item.o[item.a] + ". " + item.e;
+    feedback.className = "feedback show bad";
+  }
+
+  updateStats();
+
+  const next = document.getElementById("bossNext");
+  next.classList.remove("hidden");
+  next.textContent = bossIndex === 4
+    ? "Lihat keputusan 🏆"
+    : "Soalan seterusnya →";
+}
+
+function nextBossQuestion() {
+  clickSound();
+
+  if (bossIndex < bossQuestions.length - 1) {
+    bossIndex++;
+    renderBossQuestion();
+  } else {
+    finishBoss();
+  }
+}
+
+function finishBoss() {
+  bossFinished = true;
+
+  const passed = bossScore >= 4;
+
+  if (passed) {
+    earned.add("boss");
+    levelUpSound();
+    celebrate();
+  } else {
+    correctSound();
+  }
+
+  document.getElementById("bossQuiz").classList.add("hidden");
+  document.getElementById("bossDescription").textContent = passed
+    ? "Tahniah! Kamu telah menguasai cabaran terakhir dan menjadi Detektif Ekonomi Terhebat!"
+    : "Kamu telah menamatkan cabaran! Ulang kaji empat sektor dan cuba cabaran sekali lagi untuk mencapai 4/5.";
+
+  const area = document.getElementById("certificateArea");
+
+  area.innerHTML = `
+    <div class="certificate">
+      <div style="font-size:45px">${passed ? "🏆" : "🌟"}</div>
+      <h2>${passed ? "SIJIL DETEKTIF EKONOMI TERHEBAT" : "CABARAN SELESAI!"}</h2>
+      <p>${passed
+        ? "Syabas! Kamu berjaya menguasai cabaran ekonomi Malaysia."
+        : "Teruskan usaha! Ulang kaji dan cuba lagi untuk memperoleh gelaran Detektif Ekonomi Terhebat."}
+      </p>
+      <h3>Markah Cabaran: ${bossScore}/5</h3>
+      <p>Jumlah Mata Keseluruhan: ${score}</p>
+      ${passed ? "<p>🎖️ Lencana Master Ekonomi diperoleh!</p>" : ""}
+      <button class="main-btn" onclick="printCertificate()" style="margin-top:10px">
+        🖨️ Cetak / Simpan Sijil
+      </button>
+      ${!passed ? `
+        <button class="small-btn" onclick="retryBoss()" style="margin-top:10px">
+          🔄 Cuba sekali lagi
+        </button>` : ""}
+    </div>
+  `;
+
+  updateStats();
+}
+
+function retryBoss() {
+  bossFinished = false;
+  updateStats();
+  startBoss();
+}
+
+function printCertificate() {
+  const area = document.getElementById("certificateArea").innerHTML;
+  const printWindow = window.open("", "_blank");
+
+  if (!printWindow) {
+    showToast("Benarkan tetingkap cetakan dibuka untuk mencetak sijil.");
+    return;
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="ms">
+    <head>
+      <meta charset="UTF-8">
+      <title>Sijil Detektif Ekonomi</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 35px;
+          text-align: center;
+          color: #302751;
+        }
+        .certificate {
+          border: 6px double #b59a42;
+          padding: 35px;
+          margin: 20px auto;
+          max-width: 700px;
+        }
+        h2 { color: #795bc5; }
+        button { display: none; }
+      </style>
+    </head>
+    <body>
+      ${area}
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+}
+
+/* ======================================
+   7. EFEK VISUAL DAN REFLEKSI
+====================================== */
+
+function celebrate() {
+  const container = document.getElementById("confetti");
+  container.innerHTML = "";
+
+  const colors = ["#ff7ca8", "#ffd76a", "#8de3c0", "#82c9ff", "#a18aff"];
+
+  for (let i = 0; i < 65; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti-piece";
+    piece.style.left = Math.random() * 100 + "%";
+    piece.style.background = colors[
+      Math.floor(Math.random() * colors.length)
+    ];
+    piece.style.animationDelay = Math.random() * 0.7 + "s";
+    piece.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+    piece.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+    container.appendChild(piece);
+  }
+
+  setTimeout(() => container.innerHTML = "", 3500);
+}
+
+let toastTimeout;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2800);
+}
+
+function saveReflection() {
+  const text = document.getElementById("reflection").value.trim();
+  const feedback = document.getElementById("reflectionFeedback");
+
+  if (!text) {
+    feedback.textContent = "✏️ Tulis refleksi kamu terlebih dahulu.";
+    return;
+  }
+
+  // Tiada data dihantar ke pelayan.
+  // Refleksi ini hanya tersedia dalam halaman semasa.
+  feedback.textContent = "✅ Refleksi telah direkodkan pada halaman ini.";
+  clickSound();
+}
+
+/* ======================================
+   8. MULAKAN PERMAINAN
+====================================== */
+
+renderLevels();
+updateStats();
+
+// Tiada AI voice atau text-to-speech digunakan.
+// Muzik dan kesan bunyi hanya bermula selepas tindakan pengguna.
 </script>
+
 </body>
 </html>
